@@ -50,6 +50,57 @@ void initializeBoard()
         }
     }
 }
+string findWhiteKing()
+{
+    for(int i=0;i<8;i++)
+        for(int j=0;j<8;j++)
+            if(board[i][j]->getPiece()=="WhiteKing")
+                return place(i,j);
+}
+string findBlackKing()
+{
+    for(int i=0;i<8;i++)
+        for(int j=0;j<8;j++)
+            if(board[i][j]->getPiece()=="BlackKing")
+                return place(i,j);
+}
+void getRange(string temp)
+{
+    Range.clear();
+    for(int i=0;i<8;i++)
+    {
+        for(int j=0;j<8;j++)
+            if(board[i][j]->getType()==temp)
+                board[i][j]->possibleMovement(i,j);
+    }
+    system("cls");
+}
+bool inPossible(string a)
+{
+    for(int i=0;i<possible.size();i++)
+        if(a==possible[i])
+            return true;
+    return false;
+}
+void possibleDisplay(string pp)
+{
+
+        cout<<"   ";
+        for(int i=0;i<8;i++,cout<<"  "<<char(i+96)<<"  ");
+        cout<<endl;
+        for(int i=0;i<8;i++)
+        {
+            cout<<endl<<i+1<<"  ";
+            for(int j=0;j<8;j++)
+            {
+                if(place(i,j)!=pp && inPossible(place(i,j)))
+                    cout<<board[pp[1]-49][pp[0]-97]->takePiece();
+                else
+                    cout<<board[i][j]->getName();
+            }
+        }
+        cout<<endl<<endl;
+}
 void displayBoard()
 {
     cout<<"   ";
@@ -79,6 +130,26 @@ void writeToFile(string from,string to)
     fileEdit<<from<<" Moved To "<<to<<endl;
     fileEdit.close();
 }
+bool check(string a)
+{
+    string temp;
+    if(a=="white")
+    {
+        getRange("black");
+        temp=findWhiteKing();
+    }
+    else
+    {
+        getRange("white");
+        temp=findBlackKing();
+    }
+    for(int i=0;i<Range.size();i++)
+    {
+        if(temp==Range[i])
+            return true;
+    }
+    return false;
+}
 int main()
 {
     int turn=1,i,j;
@@ -92,6 +163,7 @@ int main()
         cout<<endl<<"Type 'Exit' to exit the application"<<endl;
         cin>>f;
         if(f=="Exit") return 0;
+        if(f[0] >48 && f[0] <57) Empty::swa(f[0],f[1]);
         j=f[0]-97;
         i=f[1]-49;
         if(turn%2==0 && board[i][j]->getType()=="white")
@@ -108,8 +180,10 @@ int main()
         }
         if(i<8&&i>-1&&j<8&&j>-1)
         {
+            system("cls");
             cout<<"The unit you Selected is : "<<board[i][j]->getPiece()<<endl<<"The possible Moves you can make are :"<<endl;
             board[i][j]->possibleMovement(i,j);
+            possibleDisplay(f);
         }
         else
             continue;
@@ -119,12 +193,31 @@ int main()
             cout<<"NO Possible Moves Choose a Different Coin:"<<endl<<endl;
             continue;
         }
+        cout<<"To choose a different coin press type 'Back'"<<endl<<endl;
         cin>>t;
+        if(t[0] >48 && t[0] <57) Empty::swa(t[0],t[1]);
+        if(t=="Back")
+            continue;
         if(verify(t)==true)
         {
+            Box* temp=board[t[1]-49][t[0]-97];
             move(f,t);
-            turn++;
             system("cls");
+            if(check("white")==true && turn%2!=0)
+            {
+                cout<<"The White King is under attack cannot make this Move !"<<endl<<endl<<endl;
+                move(t,f);
+                board[t[1]-49][t[0]-97]=temp;
+                continue;
+            }
+            if(check("black")==true && turn%2==0)
+            {
+                cout<<"The Black King is under attack cannot make this Move !"<<endl<<endl<<endl;
+                move(t,f);
+                board[t[1]-49][t[0]-97]=temp;
+                continue;
+            }
+            turn++;
             cout<<" Moved! "<<endl<<endl;
             writeToFile(f,t);
         }

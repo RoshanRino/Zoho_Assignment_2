@@ -5,6 +5,7 @@ class BlackPawn : public Box
     string name =" B_P ";
     string type ="black";
     string piece ="BlackPawn";
+    string take  =" B*P ";
 public:
     string getName()
     {
@@ -17,6 +18,10 @@ public:
     string getPiece()
     {
         return piece;
+    }
+    string takePiece()
+    {
+        return take;
     }
     void possibleMovement(int i,int j)
     {
@@ -32,13 +37,13 @@ public:
         }
         if(board[i+1][j+1]->getType()== "white"  && i+1<8&&i+1>-1&&j+1<8&&j+1>-1)
         {
-            cout<<place(i+1,j+1)<<" Take Piece "<<endl;
-            possible.push_back(place(i+1,j+1));
+            cout<<place(i+1,j+1)<<" Take Piece "<<board[i+1][j+1]->getType()<<endl;
+            possible.push_back(place(i+1,j+1));Range.push_back(place(i+1,j+1));
         }
         if(board[i+1][j-1]->getType()== "white"  && i+1<8&&i+1>-1&&j-1<8&&j-1>-1)
         {
-            cout<<place(i+1,j-1)<<" Take Piece "<<endl;
-            possible.push_back(place(i+1,j-1));
+            cout<<place(i+1,j-1)<<" Take Piece "<<board[i+1][j-1]->getType()<<endl;
+            possible.push_back(place(i+1,j-1));Range.push_back(place(i+1,j-1));
         }
 
     }

@@ -16,6 +16,7 @@ class Box
     virtual string getType()=0;
     virtual string getName()=0;
     virtual string getPiece()=0;
+    virtual string takePiece()=0;
     virtual void possibleMovement(int i,int j)=0;
 };
 vector<string> possible;
@@ -27,3 +28,5 @@ bool verify(string t)
     return false;
 }
 Box *board[8][8];
+
+vector<string> Range;

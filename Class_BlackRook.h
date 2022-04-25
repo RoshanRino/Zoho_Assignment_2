@@ -5,6 +5,7 @@ class BlackRook : public Box
     string name =" B_R ";
     string type ="black";
     string piece ="BlackRook";
+    string take  =" B*R ";
 public:
     string getName()
     {
@@ -17,6 +18,10 @@ public:
     string getPiece()
     {
         return piece;
+    }
+    string takePiece()
+    {
+        return take;
     }
     void possibleMovement(int i,int j)
     {
@@ -33,8 +38,8 @@ public:
         }
         if( tempi<8 && tempi>-1 && tempj<8 && tempj>-1&&board[tempi][tempj]->getType()=="white")
         {
-            cout<<place(tempi,tempj)<<" Take Piece "<<endl;
-            possible.push_back(place(tempi,tempj));
+            cout<<place(tempi,tempj)<<" Take Piece "<<board[tempi][tempj]->getPiece()<<endl;
+            possible.push_back(place(tempi,tempj));Range.push_back(place(tempi,tempj));
         }
         for(tempi=i,tempj=j+1;;tempj++)
         {
@@ -48,8 +53,8 @@ public:
         }
         if(tempi<8 && tempi>-1 && tempj<8 && tempj>-1 &&board[tempi][tempj]->getType()=="white")
         {
-            cout<<place(tempi,tempj)<<" Take Piece "<<endl;
-            possible.push_back(place(tempi,tempj));
+            cout<<place(tempi,tempj)<<" Take Piece "<<board[tempi][tempj]->getPiece()<<endl;
+            possible.push_back(place(tempi,tempj));Range.push_back(place(tempi,tempj));
         }
         for(tempi=i-1,tempj=j;;tempi--)
         {
@@ -63,8 +68,8 @@ public:
         }
         if( tempi<8 && tempi>-1 && tempj<8 && tempj>-1 && board[tempi][tempj]->getType()=="white")
         {
-            cout<<place(tempi,tempj)<<" Take Piece "<<endl;
-            possible.push_back(place(tempi,tempj));
+            cout<<place(tempi,tempj)<<" Take Piece "<<board[tempi][tempj]->getPiece()<<endl;
+            possible.push_back(place(tempi,tempj));Range.push_back(place(tempi,tempj));
         }
 
         for(tempi=i,tempj=j-1;;tempj--)
@@ -79,8 +84,8 @@ public:
         }
         if(tempi<8 && tempi>-1 && tempj<8 && tempj>-1 && board[tempi][tempj]->getType()=="white")
         {
-            cout<<place(tempi,tempj)<<" Take Piece "<<endl;
-            possible.push_back(place(tempi,tempj));
+            cout<<place(tempi,tempj)<<" Take Piece "<<board[tempi][tempj]->getPiece()<<endl;
+            possible.push_back(place(tempi,tempj));Range.push_back(place(tempi,tempj));
         }
 
     }

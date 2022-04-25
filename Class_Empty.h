@@ -21,4 +21,14 @@ public:
     {
         return "NA";
     }
+    string takePiece()
+    {
+
+    }
+    static void swa(char &a,char &b)
+    {
+        char temp =a;
+        a=b;
+        b=temp;
+    }
 };
