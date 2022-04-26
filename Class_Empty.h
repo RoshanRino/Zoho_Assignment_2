@@ -23,7 +23,7 @@ public:
     }
     string takePiece()
     {
-
+        return " ";
     }
     static void swa(char &a,char &b)
     {

@@ -1,3 +1,4 @@
+
 #include "Class_Empty.h"
 Empty emptyy;
 WhiteKnight whiteKnight;

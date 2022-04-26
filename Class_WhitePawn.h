@@ -38,12 +38,12 @@ public:
         }
         if(board[i-1][j+1]->getType()== "black"  && i-1<8&&i-1>-1&&j+1<8&&j+1>-1)
         {
-            cout<<place(i-1,j+1)<<" Take Piece "<<board[i-1][j+1]->getType()<<endl;
+            cout<<place(i-1,j+1)<<" Take Piece "<<board[i-1][j+1]->getPiece()<<endl;
             possible.push_back(place(i-1,j+1));Range.push_back(place(i-1,j+1));
         }
         if(board[i-1][j-1]->getType()== "black"  && i-1<8&&i-1>-1&&j-1<8&&j-1>-1)
         {
-            cout<<place(i-1,j-1)<<" Take Piece "<<board[i-1][j-1]->getType()<<endl;
+            cout<<place(i-1,j-1)<<" Take Piece "<<board[i-1][j-1]->getPiece()<<endl;
             possible.push_back(place(i-1,j-1));Range.push_back(place(i-1,j-1));
         }
     }
