@@ -1,0 +1,9 @@
+syntax ="proto3";
+
+package chess;
+
+message board{
+	
+	repeated string piece =1;
+	optional int32 turn=2;
+}
